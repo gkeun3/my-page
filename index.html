@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>은이의 숲속 비밀 오두막 🌲✨</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Gaegu (귀여운 손글씨 느낌) & Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              100: '#E8F5E9',
+              200: '#C8E6C9',
+              300: '#A5D6A7',
+              500: '#4CAF50',
+              700: '#2E7D32',
+              800: '#1B5E20',
+              900: '#0B380D'
+            },
+            wood: {
+              100: '#F5EBE6',
+              300: '#D7CCC8',
+              500: '#A1887F',
+              700: '#6D4C41',
+              900: '#3E2723'
+            }
+          },
+          fontFamily: {
+            gaegu: ['Gaegu', 'cursive'],
+            sans: ['Noto Sans KR', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Styling & Flip Card CSS */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f3f8f2;
+      background-image: radial-gradient(#c8e6c9 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+
+    .font-cute {
+      font-family: 'Gaegu', cursive;
+    }
+
+    /* Flip Card Effect */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Floating Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(-3deg); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    .animate-float-1 {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    .animate-float-2 {
+      animation: floatReverse 5s ease-in-out infinite;
+    }
+
+    .shake-anim {
+      animation: shake 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col justify-between selection:bg-forest-300 selection:text-forest-900">
+
+  <!-- Floating Background Elements -->
+  <div class="fixed top-12 left-5 text-3xl opacity-40 select-none animate-float-1 pointer-events-none">🌿</div>
+  <div class="fixed top-1/3 right-6 text-4xl opacity-40 select-none animate-float-2 pointer-events-none">🍄</div>
+  <div class="fixed bottom-20 left-8 text-3xl opacity-40 select-none animate-float-2 pointer-events-none">🐿️</div>
+  <div class="fixed bottom-1/3 right-10 text-3xl opacity-40 select-none animate-float-1 pointer-events-none">🍃</div>
+
+  <!-- Header Section -->
+  <header class="pt-8 pb-4 px-4 text-center">
+    <div class="max-w-xl mx-auto bg-white/80 backdrop-blur-md rounded-3xl p-6 border-2 border-forest-200 shadow-sm relative overflow-hidden">
+      <div class="absolute -top-6 -right-6 w-20 h-20 bg-forest-100 rounded-full blur-xl pointer-events-none"></div>
+      
+      <!-- Profile Badge -->
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-800 px-4 py-1.5 rounded-full text-sm font-semibold mb-3 border border-forest-300 shadow-inner">
+        <span>🌲 숲속 오두막의 주인</span>
+      </div>
+
+      <!-- Main Title & Nickname -->
+      <h1 class="text-4xl md:text-5xl font-cute font-bold text-forest-800 mb-2">
+        안녕하세요! 저는 <span class="bg-amber-100 text-amber-800 px-3 py-0.5 rounded-2xl border-2 border-amber-300 inline-block transform hover:scale-110 transition-transform">" 은 "</span> 이에요!
+      </h1>
+      <p class="text-gray-600 text-sm md:text-base mt-2">
+        평화로운 숲속에서 동물 친구들과 소소한 일상을 보내고 있어요 🐾<br>아래 카드들을 눌러 저에 대해 더 알아봐 주세요!
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-3xl mx-auto px-4 py-6 w-full space-y-10">
+
+    <!-- SECTION 1: Favorite Things (3 Cards with Flip Effect) -->
+    <section>
+      <div class="flex items-center gap-2 mb-6 justify-center">
+        <span class="text-2xl">✨</span>
+        <h2 class="text-2xl font-cute font-bold text-forest-800 text-center text-3xl">내가 좋아하는 3가지! (카드를 뒤집어봐!)</h2>
+        <span class="text-2xl">✨</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1: 노래 -->
+        <div class="h-64 perspective-1000">
+          <div class="flip-card-inner border-2 border-emerald-200 rounded-2xl" onclick="toggleFlip(this)">
+            <!-- Front -->
+            <div class="flip-card-front bg-gradient-to-b from-emerald-50 to-emerald-100 p-5 flex flex-col items-center justify-between border-2 border-emerald-300">
+              <span class="text-xs bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full font-bold">CLICK ME!</span>
+              <div class="text-6xl my-2 transform hover:scale-110 transition-transform">🎤</div>
+              <h3 class="text-2xl font-cute font-bold text-emerald-900">노래</h3>
+              <p class="text-xs text-emerald-700">숲속 숲새들보다 노래 부르는 걸 좋아해요!</p>
+            </div>
+            <!-- Back -->
+            <div class="flip-card-back bg-emerald-700 text-white p-5 flex flex-col items-center justify-center border-2 border-emerald-800">
+              <div class="text-3xl mb-2">🎵</div>
+              <h4 class="font-cute text-xl font-bold mb-2 text-emerald-200">좋아하는 이유!</h4>
+              <p class="text-xs leading-relaxed text-emerald-100 word-keep-all">
+                노래방 가사 스코어 100점 나올 때의 쾌감 때문! 숲속 도토리들도 들으면 춤추게 만드는 나만의 마법 같은 발성 기술 보유 중 🎶
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: 도마뱀 -->
+        <div class="h-64 perspective-1000">
+          <div class="flip-card-inner border-2 border-amber-200 rounded-2xl" onclick="toggleFlip(this)">
+            <!-- Front -->
+            <div class="flip-card-front bg-gradient-to-b from-amber-50 to-amber-100 p-5 flex flex-col items-center justify-between border-2 border-amber-300">
+              <span class="text-xs bg-amber-200 text-amber-800 px-3 py-1 rounded-full font-bold">CLICK ME!</span>
+              <div class="text-6xl my-2 transform hover:scale-110 transition-transform">🦎</div>
+              <h3 class="text-2xl font-cute font-bold text-amber-900">도마뱀</h3>
+              <p class="text-xs text-amber-700">작고 동글동글 귀여운 숲속 미니 미용사!</p>
+            </div>
+            <!-- Back -->
+            <div class="flip-card-back bg-amber-800 text-white p-5 flex flex-col items-center justify-center border-2 border-amber-900">
+              <div class="text-3xl mb-2">👁️_👁️</div>
+              <h4 class="font-cute text-xl font-bold mb-2 text-amber-200">좋아하는 이유!</h4>
+              <p class="text-xs leading-relaxed text-amber-100 word-keep-all">
+                멍하니 눈 껌빡이는 모습이 마치 세상을 해탈한 도인 같아서 볼 때마다 마음이 평화로워짐! 손가락에 올라탔을 때의 착 감기는 촉감 최고! 
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: 고양이 -->
+        <div class="h-64 perspective-1000">
+          <div class="flip-card-inner border-2 border-orange-200 rounded-2xl" onclick="toggleFlip(this)">
+            <!-- Front -->
+            <div class="flip-card-front bg-gradient-to-b from-orange-50 to-orange-100 p-5 flex flex-col items-center justify-between border-2 border-orange-300">
+              <span class="text-xs bg-orange-200 text-orange-800 px-3 py-1 rounded-full font-bold">CLICK ME!</span>
+              <div class="text-6xl my-2 transform hover:scale-110 transition-transform">🐱</div>
+              <h3 class="text-2xl font-cute font-bold text-orange-900">고양이</h3>
+              <p class="text-xs text-orange-700">말랑말랑 젤리와 귀여운 골골송의 주인공</p>
+            </div>
+            <!-- Back -->
+            <div class="flip-card-back bg-orange-700 text-white p-5 flex flex-col items-center justify-center border-2 border-orange-800">
+              <div class="text-3xl mb-2">🐾</div>
+              <h4 class="font-cute text-xl font-bold mb-2 text-orange-200">좋아하는 이유!</h4>
+              <p class="text-xs leading-relaxed text-orange-100 word-keep-all">
+                지구가 멸망해도 고양이 발바닥 젤리 냄새 한번 맡으면 다 용서할 수 있음! 도도하지만 가끔 보여주는 심쿵 꾹꾹이에 영혼을 빼앗겼기 때문 🐾
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: OX Quiz Section -->
+    <section class="bg-white/90 backdrop-blur border-2 border-forest-300 rounded-3xl p-6 shadow-sm">
+      <div class="text-center mb-4">
+        <span class="bg-forest-100 text-forest-800 text-xs px-3 py-1 rounded-full font-bold">미니 게임 🎮</span>
+        <h2 class="text-2xl font-cute font-bold text-forest-900 mt-2 text-3xl">은이에 대한 OX 퀴즈!</h2>
+        <p class="text-sm text-gray-600 mt-1">다음 문장을 읽고 O / X 버튼 중 하나를 눌러주세요.</p>
+      </div>
+
+      <!-- Quiz Box -->
+      <div class="bg-forest-50 p-6 rounded-2xl border border-forest-200 text-center my-4">
+        <p class="text-lg md:text-xl font-bold text-gray-800">
+          ❓ "나는 집에 멋진 고양이를 키우고 있다!"
+        </p>
+      </div>
+
+      <!-- Answer Buttons -->
+      <div id="quiz-buttons" class="flex justify-center gap-6 my-4">
+        <button onclick="checkAnswer('O')" class="w-28 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-2xl rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 transition-all border-b-4 border-emerald-700 flex items-center justify-center gap-2">
+          <span>O</span>
+        </button>
+        <button onclick="checkAnswer('X')" class="w-28 py-4 bg-rose-500 hover:bg-rose-600 text-white font-bold text-2xl rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 transition-all border-b-4 border-rose-700 flex items-center justify-center gap-2">
+          <span>X</span>
+        </button>
+      </div>
+
+      <!-- Quiz Result Display -->
+      <div id="quiz-result" class="hidden text-center p-4 rounded-xl mt-4 border transition-all">
+        <div id="quiz-result-title" class="text-xl font-cute font-bold mb-1"></div>
+        <div id="quiz-result-desc" class="text-sm text-gray-700"></div>
+        <button onclick="resetQuiz()" class="mt-3 text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-lg transition-colors">
+          🔄 다시 풀어보기
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Fortune Cookie Section -->
+    <section class="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-3xl p-6 text-center shadow-sm relative overflow-hidden">
+      <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-amber-200/50 rounded-full blur-xl pointer-events-none"></div>
+
+      <span class="bg-amber-200 text-amber-900 text-xs px-3 py-1 rounded-full font-bold">숲속의 신비한 운세 🔮</span>
+      <h2 class="text-2xl font-cute font-bold text-amber-900 mt-2 text-3xl">오늘의 숲속 운세 뽑기</h2>
+      <p class="text-sm text-amber-800 mt-1 mb-4">버튼을 누르면 숲속 동물 친구들이 오늘의 운세를 전달해 줘요!</p>
+
+      <!-- Fortune Display Card -->
+      <div id="fortune-box" class="min-h-[120px] bg-white border-2 border-dashed border-amber-300 rounded-2xl p-5 flex flex-col items-center justify-center shadow-inner my-4 transition-all">
+        <span class="text-4xl mb-2">🎁</span>
+        <p class="text-gray-500 font-cute text-xl">아래 버튼을 눌러 운세를 뽑아보세요!</p>
+      </div>
+
+      <button onclick="drawFortune()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-8 py-3.5 rounded-2xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all border-b-4 border-amber-700 flex items-center justify-center gap-2 mx-auto">
+        <span>✨ 오늘의 운세 확인하기 ✨</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-xs text-forest-700 border-t border-forest-200/50 bg-white/40 mt-6">
+    <p class="font-cute text-lg">🐾 은이의 숲속 오두막에 방문해주셔서 고마워요! 🐾</p>
+    <p class="mt-1 text-gray-500">© 2026 은. All rights reserved.</p>
+  </footer>
+
+  <!-- Custom JavaScript Logic -->
+  <script>
+    // 1. Flip Card Toggle Logic
+    function toggleFlip(cardElement) {
+      cardElement.classList.toggle('flipped');
+    }
+
+    // 2. OX Quiz Logic
+    function checkAnswer(userChoice) {
+      const resultBox = document.getElementById('quiz-result');
+      const resultTitle = document.getElementById('quiz-result-title');
+      const resultDesc = document.getElementById('quiz-result-desc');
+      const quizButtons = document.getElementById('quiz-buttons');
+
+      resultBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-900', 'bg-rose-50', 'border-rose-300', 'text-rose-900', 'shake-anim');
+
+      // 정답은 X (고양이를 키우고 싶지만 현재는 키우지 않음)
+      if (userChoice === 'X') {
+        // 정답 효과 (폭죽 🎉)
+        resultBox.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+        resultTitle.innerHTML = '🎉 정답입니다! 딩동댕! 🥳';
+        resultDesc.innerHTML = '아쉽게도 지금은 고양이를 키우지 않아요! 하지만 길거리의 모든 고양이들과 마음으로 랜선 집사 수행 중이랍니다 🐈';
+        
+        // Confetti Fireworks Effect
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } else {
+        // 오답 효과 (흔들림 ❌)
+        resultBox.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-900', 'shake-anim');
+        resultTitle.innerHTML = '😭 땡! 틀렸습니다!';
+        resultDesc.innerHTML = '저도 마음 같아선 귀여운 야옹이 집사가 되고 싶지만... 아직은 랜선 집사랍니다! 다시 한번 생각해보세요 🐾';
+      }
+
+      resultBox.classList.remove('hidden');
+    }
+
+    function resetQuiz() {
+      const resultBox = document.getElementById('quiz-result');
+      resultBox.classList.add('hidden');
+    }
+
+    // 3. Fortune Cookie List (10+ items)
+    const fortunes = [
+      { emoji: '🐿️', text: '다람쥐가 숨겨둔 도토리를 찾듯, 생각지 못한 곳에서 기분 좋은 횡재를 하게 될 거예요!' },
+      { emoji: '🐱', text: '길 가다 귀여운 고양이를 마주쳐 마음이 몽글몽글 따뜻해지는 하루가 될 거예요.' },
+      { emoji: '🦎', text: '도마뱀처럼 느긋하고 여유로운 마음을 가지면 복잡했던 일도 스르륵 해결됩니다!' },
+      { emoji: '🎤', text: '오늘 노래를 한 곡 들으면 마음속 스트레스가 싹 풀릴 거예요. 추천곡은 당신이 제일 좋아하는 노래!' },
+      { emoji: '🍃', text: '상쾌한 숲속 바람이 찾아오는 날! 기분 전환을 위해 가벼운 산책을 추천해요.' },
+      { emoji: '🍓', text: '달콤한 딸기처럼 기분 좋은 일들이 연속으로 찾아올 아주 특별한 하루입니다.' },
+      { emoji: '🦉', text: '지혜로운 부엉이가 응원하고 있어요! 오늘 당신의 도전은 최고의 성공을 거둘 거예요.' },
+      { emoji: '🌈', text: '비 온 뒤 무지개가 뜨듯, 그동안 고민하던 일이 깔끔하게 해결될 순풍의 날입니다!' },
+      { emoji: '🍀', text: '행운의 네잎클로버 발견! 오늘 당신이 하는 모든 선택이 정답이 될 거예요.' },
+      { emoji: '🐻', text: '곰돌이처럼 푹 쉬고 맛있는 걸 먹으면 에너지가 200% 충전되는 힐링 데이!' },
+      { emoji: '🐰', text: '토끼처럼 깡충깡충 높이 도약하는 기분 좋은 소식이 찾아올 예정이에요!' }
+    ];
+
+    let lastFortuneIndex = -1;
+
+    function drawFortune() {
+      const fortuneBox = document.getElementById('fortune-box');
+
+      // 중복 방지 랜덤 선택
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * fortunes.length);
+      } while (randomIndex === lastFortuneIndex);
+      
+      lastFortuneIndex = randomIndex;
+      const fortune = fortunes[randomIndex];
+
+      // 애니메이션 연출 (약간의 바운스)
+      fortuneBox.style.transform = 'scale(0.95)';
+      fortuneBox.style.opacity = '0.5';
+
+      setTimeout(() => {
+        fortuneBox.innerHTML = `
+          <div class="animate-bounce text-5xl mb-2">${fortune.emoji}</div>
+          <p class="font-cute text-2xl font-bold text-amber-900 mb-1">"오늘의 운세"</p>
+          <p class="text-sm md:text-base text-gray-700 max-w-md font-medium leading-relaxed">${fortune.text}</p>
+        `;
+        fortuneBox.style.transform = 'scale(1)';
+        fortuneBox.style.opacity = '1';
+      }, 150);
+    }
+  </script>
+</body>
